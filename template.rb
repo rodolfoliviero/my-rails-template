@@ -33,7 +33,10 @@ class Template < Thor::Group
     copy_file "Gemfile"
     run "bundle install"
   end
-
+  
+  def devise_support
+    copy_file "devise.rb", "spec/support/devise.rb"
+  end
 end
 
 application  <<-GENERATORS
@@ -42,7 +45,7 @@ config.generators do |g|
   g.template_engine :haml
   g.test_framework  :rspec, :fixture => true, :views => false
   g.integration_tool :rspec, :fixture => true, :views => false
-  g.fixture_replacement :factory_girl, :dir => "spec/support/factories"
+  g.fixture_replacement :factory_girl, :dir => "spec/factories"
 end
 GENERATORS
 
@@ -55,5 +58,3 @@ generate "simple_form:install"
 git :init
 
 puts "THE END"
-
-
