@@ -37,11 +37,16 @@ class Template < Thor::Group
   def devise_support
     copy_file "devise.rb", "spec/support/devise.rb"
   end
+  
+  def guard
+    copy_file "Guardfile", "."
+  end
 end
 
 application  <<-GENERATORS
 config.generators do |g|
   g.stylesheets false
+  g.javascripts false
   g.template_engine :haml
   g.test_framework  :rspec, :fixture => true, :views => false
   g.integration_tool :rspec, :fixture => true, :views => false
