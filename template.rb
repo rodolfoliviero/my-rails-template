@@ -6,7 +6,7 @@ class Template < Thor::Group
   end
 
   def clear
-    run "rm README"
+    run "rm README.rdoc"
     run "touch README.textile"
     run "rm -rf test"
     run "rm public/index.html"
@@ -31,7 +31,6 @@ class Template < Thor::Group
   def gemfile
     run "rm Gemfile"
     copy_file "Gemfile"
-    run "bundle install"
   end
   
   def devise_support
@@ -39,7 +38,7 @@ class Template < Thor::Group
   end
   
   def guard
-    copy_file "Guardfile", "."
+    copy_file "Guardfile"
   end
 end
 
@@ -57,8 +56,8 @@ GENERATORS
 Template.new.invoke_all
 
 generate "rspec:install"
-generate "devise:install"
 generate "simple_form:install"
+generate "devise:install"
 
 git :init
 
